@@ -1,0 +1,682 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>2.2 Algoritma - Rangkuman Komputasi Numerik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-metode-penyelesaian-initial-value-problems-persamaan-deferensial-biasa" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Rangkuman Komputasi Numerik" class="md-header__button md-logo" aria-label="Rangkuman Komputasi Numerik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rangkuman Komputasi Numerik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2.2 Algoritma
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Rangkuman Komputasi Numerik" class="md-nav__button md-logo" aria-label="Rangkuman Komputasi Numerik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Rangkuman Komputasi Numerik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        1. Turunan Numerik
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.1%20Teori/" class="md-nav__link">
+        1.1 Teori
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.2%20Algoritma/" class="md-nav__link">
+        1.2 Algoritma
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.3%20Coding/" class="md-nav__link">
+        1.3 Coding
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20Persamaan%20Deferensial%20Biasa/" class="md-nav__link">
+        2. Persamaan Deferensial Biasa
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.1%20Teori/" class="md-nav__link">
+        2.1 Teori
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          2.2 Algoritma
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        2.2 Algoritma
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-metode-penyelesaian-initial-value-problems-persamaan-deferensial-biasa" class="md-nav__link">
+    A. Metode Penyelesaian Initial Value Problems Persamaan Deferensial Biasa
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Metode Penyelesaian Initial Value Problems Persamaan Deferensial Biasa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1metode-euler" class="md-nav__link">
+    1.Metode Euler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2metode-heun" class="md-nav__link">
+    2.Metode Heun
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3metode-titik-tengah" class="md-nav__link">
+    3.Metode Titik Tengah
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4metode-runge-kutta-orde-4" class="md-nav__link">
+    4.Metode Runge-Kutta Orde 4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5metode-multistep-linier" class="md-nav__link">
+    5.Metode Multistep Linier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6metode-deret-taylor" class="md-nav__link">
+    6.Metode Deret Taylor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7metode-deret-maclaurin" class="md-nav__link">
+    7.Metode Deret MacLaurin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.3%20Coding/" class="md-nav__link">
+        2.3 Coding
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20Sistem%20Persamaan%20Linier/" class="md-nav__link">
+        3. Sistem Persamaan Linier
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.1%20Teori/" class="md-nav__link">
+        3.1 Teori
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.2%20Algoritma/" class="md-nav__link">
+        3.2 Algoritma
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.3%20Coding/" class="md-nav__link">
+        3.3 Coding
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-metode-penyelesaian-initial-value-problems-persamaan-deferensial-biasa" class="md-nav__link">
+    A. Metode Penyelesaian Initial Value Problems Persamaan Deferensial Biasa
+  </a>
+  
+    <nav class="md-nav" aria-label="A. Metode Penyelesaian Initial Value Problems Persamaan Deferensial Biasa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1metode-euler" class="md-nav__link">
+    1.Metode Euler
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2metode-heun" class="md-nav__link">
+    2.Metode Heun
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3metode-titik-tengah" class="md-nav__link">
+    3.Metode Titik Tengah
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4metode-runge-kutta-orde-4" class="md-nav__link">
+    4.Metode Runge-Kutta Orde 4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5metode-multistep-linier" class="md-nav__link">
+    5.Metode Multistep Linier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6metode-deret-taylor" class="md-nav__link">
+    6.Metode Deret Taylor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7metode-deret-maclaurin" class="md-nav__link">
+    7.Metode Deret MacLaurin
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>2.2 Algoritma</h1>
+                
+                <h2 id="a-metode-penyelesaian-initial-value-problems-persamaan-deferensial-biasa">A. Metode Penyelesaian Initial Value Problems Persamaan Deferensial Biasa</h2>
+<h3 id="1metode-euler">1.Metode Euler</h3>
+<p>Metode Euler adalah metode yang paling sederhana yang diturunkan dari deret Taylor. Penyelesaian initial value problems menggunakan metode Euler dilakukan melalui Persamaan :</p>
+<p>$$yi+1=yi+f\left( xi,yi\right) h$$</p>
+<p>dimana i merupakan tahapan iterasi.</p>
+<p>Algoritma Metode Euler :</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Lakukan integrasi menggunakan persamaan diatas.</p>
+<h3 id="2metode-heun">2.Metode Heun</h3>
+<p>Metode Heun adalah salah satu peningkatan dari metode Euler. Metode ini melibatkan 2 buah persamaan. Persamaan pertama disebut sebagai persamaan prediktor yang digunakan untuk memprediksi nilai integrasi awal.</p>
+<p>$$y_{i+1}^{0}=yi+f\left( x_{i},yi\right) h$$ Persamaan (10.2).</p>
+<p>$$y_{i+1}=y_{i}+\dfrac{f\left( xi,yi\right) +f\begin{pmatrix} \\ x_{i+1},y_{i+1}^{0} \end{pmatrix}}{2}h$$ Persamaan (10.3).</p>
+<p>Algoritma Metode Heun :</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Lakukan prediksi nilai awal dengan Persamaan (10.2).</p>
+<p>4.Lakukan koreksi nilai awal menggunakan Persamaan (10.3).</p>
+<p>5.Lakukan koreksi terhadap nilai koreksi yang dihasilkan sebelumnya menggunakan Persamaan (10.3).</p>
+<h3 id="3metode-titik-tengah">3.Metode Titik Tengah</h3>
+<p>Metode titik tengah adalah metode yang menggunakan setengah step size pada metode Euler untuk melakukan estimasi terhadap integral suatu persamaan diferensial. Metode ini melakukan perhitungan melalui dua tahapan yaitu: menghitung nilai estimasi integral pada setengah step size dan menghitung nilai integral menggunkan hasil perhitungan setengah step size sebelumnya.</p>
+<p>$$y_{{i+\dfrac{1}{2}}}=y_{i}+f\left( x_{i},y_{i}\right) \dfrac{h}{2}$$ Persamaan (10.4).</p>
+<p>$$y_{i+1}=y_{i}+f\left( x_{i}+\dfrac{1}{2},y_{i},\dfrac{1}{2}\right) h$$ Persamaan (10.5).</p>
+<p>Algoritma Metode Tengah :</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Lakukan integrasi pada setengah tahapan iterasi menggunakan Persamaan (10.4).</p>
+<p>4.Lakukan iterasi pada setengah tahapan selanjutnya menggunakan Persamaan (10.5).</p>
+<h3 id="4metode-runge-kutta-orde-4">4.Metode Runge-Kutta Orde 4</h3>
+<p>Runge-Kutta orde 4 adalah metode yang paling sering digunakan dalam penyelesaian persamaan diferensial. Metode ini dapat memperoleh akurasi deret Taylor tanpa memerlukan diferensiasi orde yang lebih tinggi.</p>
+<p>$$y_{i+1}=y_{i}+\dfrac{1}{6}\left( k_{1}+2k_{2}+2k_{3}+k_{4}\right) h$$ Persamaan (10.6).</p>
+<p>Algoritma Runge-Kutta Orde 4 :</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Lakukan integrasi menggunakan Persamaan (10.6).</p>
+<h3 id="5metode-multistep-linier">5.Metode Multistep Linier</h3>
+<p>Metode multistep linier adalah metode yang dikembangkan untuk mengatasi masalah jika kita dapat menggunakan kembali perkiraan sebelumnya, kita dapat memperoleh akurasi tambahan tanpa menimbulkan penalti kinerja yang terkait dengan evaluasi fungsi tambahan.</p>
+<p>$$y_{i+2}=y_{i+1}+\dfrac{h}{2}\left( 3f\left( x_{i+1},y_{i+1}\right) -f\left( x_{i},y_{i}\right) \right)$$ Persamaan (10.11).</p>
+<p>Algoritma Multistep Linier :</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Lakukan pendekatan pada iterasi ke-1 menggunakan metode Euler.</p>
+<p>4.Lakukan integrasi ke-2 sampai n menggunakan Persamaan (10.11).</p>
+<h3 id="6metode-deret-taylor">6.Metode Deret Taylor</h3>
+<p>Problem yang akan diselesaikan menggunakan metode deret Taylor adalah persamaan deferensial biasa orde satu :</p>
+<p>$$\dfrac{dy\left( x\right) }{dx}=f\left( x,y\right) ,y\left( x_{0}\right) =y_{0}$$</p>
+<p>Estimasi pada beberapa titik :</p>
+<p>$$y\left( x_{0}+h\right), y\left( x_{0}+2h\right), y\left( x_{0}+3h\right),...$$</p>
+<p>Dihitung dengan menggunakan pemotongan expansi deret Taylor.</p>
+<p>Algoritma Deret Taylor :</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Tentukan turunan-turunan yang diperlukan untuk menyelesaikan permasalahan .</p>
+<p>4.Hasil dari perhitungan</p>
+<h3 id="7metode-deret-maclaurin">7.Metode Deret MacLaurin</h3>
+<p>Deret MacLaurin adalah metode yang masih berhubungan erat dengan Deret Taylor. Deret MacLaurin merupakan kasus khusus dari deret Taylor, yaitu deret Taylor dengan fungsi yang di ekspansi di sekitar c = 0.</p>
+<p>Deret Maclaurin disebut juga sebagai Deret Taylor Baku. </p>
+<p>Formula deret Maclaurin :</p>
+<p>$$f\left( x\right) =f\left( 0\right) +\dfrac{f'\left( 0\right) }{1!}x+\dfrac{f''\left( 0\right) }{2!}x^{2}+\dfrac{f'''\left( 0\right) }{3!}x^{3}+\ldots$$</p>
+<p>Algoritma Deret MacLaurin (sama seperti deret Taylor):</p>
+<p>1.Tentukan titik awal integrasi x0 dan y0.</p>
+<p>2.Tentukan jumlah iterasi n dan step size h yang digunakan.</p>
+<p>3.Tentukan turunan-turunan yang diperlukan untuk menyelesaikan permasalahan .</p>
+<p>4.Hasil dari perhitungan</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../2.1%20Teori/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 2.1 Teori" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              2.1 Teori
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2.3%20Coding/" class="md-footer__link md-footer__link--next" aria-label="Next: 2.3 Coding" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              2.3 Coding
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

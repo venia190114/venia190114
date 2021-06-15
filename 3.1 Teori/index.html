@@ -1,0 +1,684 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+    
+    
+      
+        <title>3.1 Teori - Rangkuman Komputasi Numerik</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#a-definisi-sistem-persamaan-linier" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Rangkuman Komputasi Numerik" class="md-header__button md-logo" aria-label="Rangkuman Komputasi Numerik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Rangkuman Komputasi Numerik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3.1 Teori
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Rangkuman Komputasi Numerik" class="md-nav__button md-logo" aria-label="Rangkuman Komputasi Numerik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Rangkuman Komputasi Numerik
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        1. Turunan Numerik
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.1%20Teori/" class="md-nav__link">
+        1.1 Teori
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.2%20Algoritma/" class="md-nav__link">
+        1.2 Algoritma
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.3%20Coding/" class="md-nav__link">
+        1.3 Coding
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20Persamaan%20Deferensial%20Biasa/" class="md-nav__link">
+        2. Persamaan Deferensial Biasa
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.1%20Teori/" class="md-nav__link">
+        2.1 Teori
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.2%20Algoritma/" class="md-nav__link">
+        2.2 Algoritma
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.3%20Coding/" class="md-nav__link">
+        2.3 Coding
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20Sistem%20Persamaan%20Linier/" class="md-nav__link">
+        3. Sistem Persamaan Linier
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          3.1 Teori
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        3.1 Teori
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-definisi-sistem-persamaan-linier" class="md-nav__link">
+    A. DEFINISI SISTEM PERSAMAAN LINIER
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-sistem-persamaan-linier-dua-variabel-spldv" class="md-nav__link">
+    B. SISTEM PERSAMAAN LINIER DUA VARIABEL (SPLDV)
+  </a>
+  
+    <nav class="md-nav" aria-label="B. SISTEM PERSAMAAN LINIER DUA VARIABEL (SPLDV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1metode-grafik" class="md-nav__link">
+    1.Metode grafik
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2metode-eliminasi" class="md-nav__link">
+    2.Metode eliminasi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3metode-substitusi" class="md-nav__link">
+    3.Metode substitusi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4metode-eliminasi-subtitusi" class="md-nav__link">
+    4.Metode eliminasi-subtitusi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-sistem-persamaan-linier-tiga-variabel-spltv" class="md-nav__link">
+    C. SISTEM PERSAMAAN LINIER TIGA VARIABEL (SPLTV)
+  </a>
+  
+    <nav class="md-nav" aria-label="C. SISTEM PERSAMAAN LINIER TIGA VARIABEL (SPLTV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1metode-subtitusi" class="md-nav__link">
+    1.Metode Subtitusi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2metode-eliminasi_1" class="md-nav__link">
+    2.Metode Eliminasi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.2%20Algoritma/" class="md-nav__link">
+        3.2 Algoritma
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.3%20Coding/" class="md-nav__link">
+        3.3 Coding
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a-definisi-sistem-persamaan-linier" class="md-nav__link">
+    A. DEFINISI SISTEM PERSAMAAN LINIER
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#b-sistem-persamaan-linier-dua-variabel-spldv" class="md-nav__link">
+    B. SISTEM PERSAMAAN LINIER DUA VARIABEL (SPLDV)
+  </a>
+  
+    <nav class="md-nav" aria-label="B. SISTEM PERSAMAAN LINIER DUA VARIABEL (SPLDV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1metode-grafik" class="md-nav__link">
+    1.Metode grafik
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2metode-eliminasi" class="md-nav__link">
+    2.Metode eliminasi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3metode-substitusi" class="md-nav__link">
+    3.Metode substitusi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4metode-eliminasi-subtitusi" class="md-nav__link">
+    4.Metode eliminasi-subtitusi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#c-sistem-persamaan-linier-tiga-variabel-spltv" class="md-nav__link">
+    C. SISTEM PERSAMAAN LINIER TIGA VARIABEL (SPLTV)
+  </a>
+  
+    <nav class="md-nav" aria-label="C. SISTEM PERSAMAAN LINIER TIGA VARIABEL (SPLTV)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1metode-subtitusi" class="md-nav__link">
+    1.Metode Subtitusi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2metode-eliminasi_1" class="md-nav__link">
+    2.Metode Eliminasi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>3.1 Teori</h1>
+                
+                <h2 id="a-definisi-sistem-persamaan-linier">A. DEFINISI SISTEM PERSAMAAN LINIER</h2>
+<p>Sistem persamaan linear ialah kumpulan persamaan linear yang dikorelasikan untuk membentuk suatu sistem. Sistem persamaannya bisa terdiri dari satu variabel, dua variabel atau lebih. Dalam bahasan ini, kita hanya membahas sistem persamaan linear dengan dua dan tiga variabel.</p>
+
+<h2 id="b-sistem-persamaan-linier-dua-variabel-spldv">B. SISTEM PERSAMAAN LINIER DUA VARIABEL (SPLDV)</h2>
+<p>Sistem persamaan linear dua variabel ialah sistem persamaan linear yang terdiri dari dua persamaan dimana masing-masing persamaan memiliki dua variabel. Contoh SPLDV dengan variabel x dan y :</p>
+<p>$$\begin{cases}ax+by=c\\ fx-gy=h\end{cases}$$</p>
+<p>dimana a,b,c,f,g dan h adalah bilangan-bilangan real.</p>
+<p>Penyelesaian SPLDV</p>
+<p>Tujuan penyelesaian ini untuk menentukan nilai yang memenuhi kedua persamaan yang ada pada SPLDV.</p>
+<p>Metode Penyelesaian :</p>
+
+<h3 id="1metode-grafik">1.Metode grafik</h3>
+<p>Pada metode grafik ini, langkah-langkah yang dilakukan pertama adalah menentukan grafik garis dari masing-masing persamaan kemudian menentukan titik potong dari kedua garis. Titik potong dari kedua garis tersebut adalah penyelesaian dari SPLDV.</p>
+<p>Pada metode grafik ini, terdapat beberapa jenis himpunan penyelesaian berdasarkan grafik persamaan, yaitu:</p>
+<p>1.Apabila kedua garis berpotongan, maka perpotonga kedua garis adalah penyelesaian dari SPLDV dan memiliki satu penyelesaian.</p>
+<p>2.Apabila kedua garis sejajar, maka SPLDV tidak memiliki penyelesaian.</p>
+<p>3.Apabila kedua garis saling berhimpit, maka SPLDV memiliki tak berhingga himpunan penyelesaian.</p>
+<h3 id="2metode-eliminasi">2.Metode eliminasi</h3>
+<p>Pada metode eliminasi ini, menentukan penyelesaian dari variabel x dengan cara mengeliminasi variabel y, dan untuk menentukan penyelesaian variabel y dengan cara mengeliminasi variabel x.</p>
+
+<h3 id="3metode-substitusi">3.Metode substitusi</h3>
+<p>Pada metode substitusi, langkah pertama yang dilakukan adalah mengubah salah satu persamaan menjadi persamaan fungsi, yaitu x sebagai fungsi dari y atau y sebagai fungsi dari x. Kemudian subtitusikan x atau y pada persamaan yang lain.</p>
+
+<h3 id="4metode-eliminasi-subtitusi">4.Metode eliminasi-subtitusi</h3>
+<p>Metode ini adalah gabungan dari metode eliminasi dan subtitusi. Pertama eliminasi salah satu variabel, kemudian penyelesaian dari variabel yang diperoleh disubtitusikan pada salah satu persamaan.</p>
+
+<h2 id="c-sistem-persamaan-linier-tiga-variabel-spltv">C. SISTEM PERSAMAAN LINIER TIGA VARIABEL (SPLTV)</h2>
+<p>Sistem persamaan linear tiga variabel adalah sistem persamaan yang terdiri dari tiga persamaan dimana masing-masing persamaan memiliki tiga variabel. Contoh SPLTV dengan variabel x,y, dan z:</p>
+<p>$$\begin{cases}a_{1}x_{1}+b_{1}y_{1}+c_{1}z_{1}=d_{1}\\ a_{2}x_{2}+b_{2}y_{2}+c_{2}z_{2}=d_{2}\\ a_{3}x_{3}+b_{3}y_{3}+c_{3}z_{3}=d_{3}\end{cases}$$</p>
+<p>dimana a, b, c dan d  adalah bilangan-bilangan real.</p>
+<p>Pada SPLTV terdapat 2 cara penyelesaian, yaitu :</p>
+
+<h3 id="1metode-subtitusi">1.Metode Subtitusi</h3>
+<p>1.Ubah salah satu persamaan yang ada pada sistem dan nyatakan x sebagai fungsi dari y dan z, atau y sebagai fungsi dari x dan z, atau z sebagai fungsi dari x dan y.</p>
+<p>2.Subtitusikan fungsi x atau y atau z dari langkah pertama pada dua persamaan yang lain, sehingga diperoleh SPLDV.</p>
+<p>3.Selesaikan SPLDV yang diperoleh dengan metode yang dibahas pada penyelesaian SPLDV di atas.</p>
+<h3 id="2metode-eliminasi_1">2.Metode Eliminasi</h3>
+<p>1.Eliminasi salah satu variabel sehingga diperoleh SPLDV</p>
+<p>2.Selesaikan SPLDV yang diperoleh dengan langkah seperti pada penyelesaian SPLDV yang telah dibahas</p>
+<p>3.Subtitusikan variabel yang telah diperoleh pada persamaan yang ada.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../3.%20Sistem%20Persamaan%20Linier/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Sistem Persamaan Linier" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              3. Sistem Persamaan Linier
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../3.2%20Algoritma/" class="md-footer__link md-footer__link--next" aria-label="Next: 3.2 Algoritma" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              3.2 Algoritma
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+      
+        <script src="../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
